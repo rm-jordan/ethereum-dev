@@ -1,7 +1,22 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { ethers } from "ethers";
+import "./App.css";
+import Greeter from "./artifacts/contracts/Greeter.sol/Greeter.json";
+
+// store our contract in a variable
+
+const greeterAddress = " 0x5fbdb2315678afecb367f032d93f642f64180aa3";
 
 function App() {
+  const [greeting, setGreetingValue] = useState();
+
+  // connects to metamask wallet of the user when we create a transaction
+  async function requestAccount() {}
+
+  async function fetchGreeting() {}
+
+  async function setGreeting() {}
+
   return (
     <div className="App">
       <header className="App-header">
