@@ -43,9 +43,10 @@ function App() {
       const provider = new ethers.providers.Web3Provider(window.ethereum);
       console.log({ provider });
       const signer = provider.getSigner();
+      // new instance of contract with the signer instead of the provider
       const contract = new ethers.Contract(greeterAddress, Greeter.abi, signer);
       const transaction = await contract.setGreeting(greeting);
-      await transaction.wait();
+      await transaction.wait(); // wait for write then log
       fetchGreeting();
     }
   }
@@ -53,18 +54,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <button onClick={fetchGreeting}>Fetch Greeting</button>
       </header>
     </div>
   );
