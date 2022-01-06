@@ -8,7 +8,7 @@ import Greeter from "./artifacts/contracts/Greeter.sol/Greeter.json";
 const greeterAddress = " 0x5fbdb2315678afecb367f032d93f642f64180aa3";
 
 function App() {
-  const [greeting, setGreetingValue] = useState();
+  const [greeting, setGreetingValue] = useState("");
   // if UI needed updating create another useState here instead of console.log and render it
 
   // connects to metamask wallet of the user when we create a transaction - function prompts user
@@ -46,6 +46,7 @@ function App() {
       // new instance of contract with the signer instead of the provider
       const contract = new ethers.Contract(greeterAddress, Greeter.abi, signer);
       const transaction = await contract.setGreeting(greeting);
+      setGreetingValue("");
       await transaction.wait(); // wait for write then log
       fetchGreeting();
     }
@@ -55,6 +56,12 @@ function App() {
     <div className="App">
       <header className="App-header">
         <button onClick={fetchGreeting}>Fetch Greeting</button>
+        <button onClick={setGreeting}>Set Greeting</button>
+        <input
+          onChange={(e) => setGreetingValue(e.target.value)}
+          placeholder="Set Greeting"
+          value={greeting}
+        />
       </header>
     </div>
   );
